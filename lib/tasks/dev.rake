@@ -17,6 +17,12 @@ task({ :api_pull => :environment }) do
   puts "Got #{results_fvp.count} FVP results."
   p results_fic.first.nombre_patrimonio
   p results_fvp.first.nombre_patrimonio
+  p results_fic.first.fecha_corte
+  p results_fic.last.fecha_corte
+  p results_fvp.first.fecha_corte
+  p results_fvp.last.fecha_corte
+
+
   # results_fic.each do |dato|
   #   puts "Fecha corte: #{dato.fecha_corte} - Valor de unidad #{dato.valor_unidad_operaciones}"
   # end
