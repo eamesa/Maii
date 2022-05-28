@@ -73,7 +73,7 @@ results_fvp.each do |dato|
   fondo.save
 end
 
-funds = Fund.all
+funds = Fondo.all
 
 # Parts
 
