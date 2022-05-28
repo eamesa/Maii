@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Part:</strong>
+  <%= @investment.part_id %>
+</p>
+
+<p>
+  <strong>Movement date:</strong>
+  <%= @investment.movement_date %>
+</p>
+
+<p>
+  <strong>Movement type:</strong>
+  <%= @investment.movement_type %>
+</p>
+
+<p>
+  <strong>Movement value:</strong>
+  <%= @investment.movement_value %>
+</p>
+
+<p>
+  <strong>Portfolio:</strong>
+  <%= @investment.portfolio_id %>
+</p>
+
+<%= link_to 'Edit', edit_investment_path(@investment) %> |
+<%= link_to 'Back', investments_path %>

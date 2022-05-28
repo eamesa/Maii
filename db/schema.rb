@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_28_042013) do
+ActiveRecord::Schema.define(version: 2022_05_28_042824) do
 
   create_table "admins", force: :cascade do |t|
     t.string "nombre_admin"
@@ -42,12 +42,33 @@ ActiveRecord::Schema.define(version: 2022_05_28_042013) do
     t.index ["admin_id"], name: "index_fondos_on_admin_id"
   end
 
+  create_table "investments", force: :cascade do |t|
+    t.integer "part_id"
+    t.datetime "movement_date"
+    t.string "movement_type"
+    t.float "movement_value"
+    t.integer "portfolio_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["part_id"], name: "index_investments_on_part_id"
+    t.index ["portfolio_id"], name: "index_investments_on_portfolio_id"
+  end
+
   create_table "parts", force: :cascade do |t|
     t.integer "fondo_id"
     t.integer "codigo_participaciones"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["fondo_id"], name: "index_parts_on_fondo_id"
+  end
+
+  create_table "portfolios", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "nombre_portafolio"
+    t.integer "investments_count"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_portfolios_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -63,8 +84,23 @@ ActiveRecord::Schema.define(version: 2022_05_28_042013) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "values", force: :cascade do |t|
+    t.datetime "fecha_corte"
+    t.float "precio_cierre"
+    t.float "valor_unidad"
+    t.float "valor_fondo"
+    t.integer "part_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["part_id"], name: "index_values_on_part_id"
+  end
+
   add_foreign_key "favoritos", "parts"
   add_foreign_key "favoritos", "users"
   add_foreign_key "fondos", "admins"
+  add_foreign_key "investments", "parts"
+  add_foreign_key "investments", "portfolios"
   add_foreign_key "parts", "fondos"
+  add_foreign_key "portfolios", "users"
+  add_foreign_key "values", "parts"
 end
