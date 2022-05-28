@@ -13,6 +13,8 @@ gem 'rails', '~> 6.0.3', '>= 6.0.3.2'
 gem 'sprockets', '< 4'
 gem 'sassc-rails'
 gem 'faker'
+gem 'soda-ruby', :require => 'soda'
+gem 'devise', '~> 4.2'
 
 group :development do
   gem 'htmlbeautifier'

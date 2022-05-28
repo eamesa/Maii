@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Fecha corte:</strong>
+  <%= @value.fecha_corte %>
+</p>
+
+<p>
+  <strong>Precio cierre:</strong>
+  <%= @value.precio_cierre %>
+</p>
+
+<p>
+  <strong>Valor unidad:</strong>
+  <%= @value.valor_unidad %>
+</p>
+
+<p>
+  <strong>Valor fondo:</strong>
+  <%= @value.valor_fondo %>
+</p>
+
+<p>
+  <strong>Part:</strong>
+  <%= @value.part_id %>
+</p>
+
+<%= link_to 'Edit', edit_value_path(@value) %> |
+<%= link_to 'Back', values_path %>
