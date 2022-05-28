@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nombre fondo:</strong>
+  <%= @fondo.nombre_fondo %>
+</p>
+
+<p>
+  <strong>Admin:</strong>
+  <%= @fondo.admin_id %>
+</p>
+
+<p>
+  <strong>Tipo fondo:</strong>
+  <%= @fondo.tipo_fondo %>
+</p>
+
+<p>
+  <strong>Codigo tipo fondo:</strong>
+  <%= @fondo.codigo_tipo_fondo %>
+</p>
+
+<p>
+  <strong>Codigo fondo:</strong>
+  <%= @fondo.codigo_fondo %>
+</p>
+
+<p>
+  <strong>Tipo participaciones count:</strong>
+  <%= @fondo.tipo_participaciones_count %>
+</p>
+
+<%= link_to 'Edit', edit_fondo_path(@fondo) %> |
+<%= link_to 'Back', fondos_path %>

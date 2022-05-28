@@ -10,7 +10,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_28_035901) do
+ActiveRecord::Schema.define(version: 2022_05_28_040425) do
+
+  create_table "admins", force: :cascade do |t|
+    t.string "nombre_admin"
+    t.string "tipo_admin"
+    t.string "codigo_admin"
+    t.integer "fondos_count"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "fondos", force: :cascade do |t|
+    t.string "nombre_fondo"
+    t.integer "admin_id"
+    t.string "tipo_fondo"
+    t.string "codigo_tipo_fondo"
+    t.string "codigo_fondo"
+    t.integer "tipo_participaciones_count"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["admin_id"], name: "index_fondos_on_admin_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -25,4 +46,5 @@ ActiveRecord::Schema.define(version: 2022_05_28_035901) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "fondos", "admins"
 end
