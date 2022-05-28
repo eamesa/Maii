@@ -26,7 +26,7 @@ task({ :api_pull => :environment }) do
 
   Admin.destroy_all
   Fondo.destroy_all
-  # Part.destroy_all
+  Part.destroy_all
   # Value.destroy
 
 # Admins
@@ -73,11 +73,24 @@ results_fvp.each do |dato|
   fondo.save
 end
 
+funds = Fund.all
 
-#  codigo_fondo               :string
-#  codigo_tipo_fondo          :string
-#  nombre_fondo               :string
-#  tipo_fondo                 :string
+# Parts
 
+results_fic.each do |dato|
+  found_fund = funds.where(:nombre_fondo => dato.fetch("nombre_patrimonio")).at(0)
+  part = Part.new
+  part.codigo_participaciones = dato.tipo_participacion
+  part.fondo_id = found_fund.id
+  part.save
+end
+
+results_fvp.each do |dato|
+  found_fund = funds.where(:nombre_fondo => dato.fetch("nombre_patrimonio")).at(0)
+  part = Part.new
+  part.codigo_participaciones = 1
+  part.fondo_id = found_fund.id
+  part.save
+end
 
 end
