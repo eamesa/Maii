@@ -77,7 +77,7 @@ task({ :api_pull => :environment }) do
   # Parts
 
   results_fic.each do |dato|
-    found_fund = funds.where(:nombre_fondo => dato.fetch("nombre_patrimonio")).at(0)
+    found_fund = funds.where(:nombre_fondo => dato.nombre_patrimonio).at(0)
     part = Part.new
     part.codigo_participaciones = dato.tipo_participacion
     part.fondo_id = found_fund.id
@@ -85,7 +85,7 @@ task({ :api_pull => :environment }) do
   end
 
   results_fvp.each do |dato|
-    found_fund = funds.where(:nombre_fondo => dato.fetch("nombre_patrimonio")).at(0)
+    found_fund = funds.where(:nombre_fondo => dato.nombre_patrimonio).at(0)
     part = Part.new
     part.codigo_participaciones = 1
     part.fondo_id = found_fund.id
@@ -97,13 +97,14 @@ task({ :api_pull => :environment }) do
   # Value
 
   results_fic.each do |dato|
-    # found_part = parts.where(:nombre_fondo => dato.fetch("nombre_patrimonio")).at(0)
+    found_fund_id = funds.where(:nombre_fondo => dato.nombre_patrimonio).at(0).id
+    found_part = parts.where(:fund_id => found_fund_id, :codigo_participaciones => dato.tipo_participacion).at(0)
     valor = Value.new
     valor.fecha_corte = dato.fecha_corte
     valor.precio_cierre = dato.precierre_fondo_dia_t
     valor.valor_fondo = dato.valor_fondo_cierre_dia_t   
     valor.valor_unidad = dato.valor_unidad_operaciones  
-    #valor.part_id
+    valor.part_id = found_part.id
     valor.save      
   end
 
