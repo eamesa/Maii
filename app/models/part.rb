@@ -17,5 +17,5 @@
 #  fondo_id  (fondo_id => fondos.id)
 #
 class Part < ApplicationRecord
-  belongs_to :fondo
+  belongs_to :fondo, counter_cache: :tipo_participaciones_count
 end
