@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_28_040425) do
+ActiveRecord::Schema.define(version: 2022_05_28_041009) do
 
   create_table "admins", force: :cascade do |t|
     t.string "nombre_admin"
@@ -33,6 +33,14 @@ ActiveRecord::Schema.define(version: 2022_05_28_040425) do
     t.index ["admin_id"], name: "index_fondos_on_admin_id"
   end
 
+  create_table "parts", force: :cascade do |t|
+    t.integer "fondo_id"
+    t.integer "codigo_participaciones"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["fondo_id"], name: "index_parts_on_fondo_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -47,4 +55,5 @@ ActiveRecord::Schema.define(version: 2022_05_28_040425) do
   end
 
   add_foreign_key "fondos", "admins"
+  add_foreign_key "parts", "fondos"
 end
