@@ -21,5 +21,6 @@
 #  admin_id  (admin_id => admins.id)
 #
 class Fondo < ApplicationRecord
-  belongs_to :admin
+  belongs_to :admin, class_name: "Admin", foreign_key: "admin_id", counter_cache: true
+  validates_uniqueness_of :nombre_fondo
 end

@@ -7,8 +7,10 @@ task({ :api_pull => :environment }) do
   # results_raw = client.get("https://www.datos.gov.co/resource/qhpu-8ixx.json", :$limit => 5000)
   #results_raw = client.get("https://www.datos.gov.co/resource/qhpu-8ixx.json", {"$where" => "subtipo_negocio != 7", :$limit => 200})
   # results_fic_raw = client.get("https://www.datos.gov.co/resource/qhpu-8ixx.json?codigo_negocio=58347&tipo_participacion=501", :$limit => 10000)
-  results_fic_raw = client.get("https://www.datos.gov.co/resource/qhpu-8ixx.json?codigo_negocio=58347", :$limit => 10000)
-  results_fvp_raw = client.get("https://www.datos.gov.co/resource/gpzw-wmxd.json?codigo_patrimonio=68", :$limit => 10000)
+  # results_fic_raw = client.get("https://www.datos.gov.co/resource/qhpu-8ixx.json?codigo_negocio=58347", :$limit => 10000)
+  # results_fvp_raw = client.get("https://www.datos.gov.co/resource/gpzw-wmxd.json?codigo_patrimonio=68", :$limit => 10000)
+  results_fic_raw = client.get("https://www.datos.gov.co/resource/qhpu-8ixx.json?fecha_corte=2022-01-01T00:00:00.000", :$limit => 1000)
+  results_fvp_raw = client.get("https://www.datos.gov.co/resource/gpzw-wmxd.json?fecha_corte=2022-01-01T00:00:00.000", :$limit => 1000)
 
   results_fic = results_fic_raw.body
   results_fvp = results_fvp_raw.body
@@ -56,7 +58,21 @@ results_fic.each do |dato|
   fondo.codigo_tipo_fondo = dato.subtipo_negocio
   fondo.nombre_fondo = dato.nombre_patrimonio
   fondo.tipo_fondo = dato.nombre_subtipo_patrimonio
-  fondo.admin_id
+  fondo.admin_id = found_admin.id
+  fondo.save
+end
+
+results_fvp.each do |dato|
+  found_admin = admins.where(:codigo_admin => dato.codigo_entidad).at(0)
+  fondo = Fondo.new
+  fondo.codigo_fondo = dato.codigo_patrimonio
+  fondo.codigo_tipo_fondo = 9
+  fondo.nombre_fondo = dato.nombre_patrimonio
+  fondo.tipo_fondo = "PORTAFOLIO FVP"
+  fondo.admin_id = found_admin.id
+  fondo.save
+end
+
 
 #  codigo_fondo               :string
 #  codigo_tipo_fondo          :string

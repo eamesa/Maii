@@ -11,6 +11,7 @@
 #  updated_at   :datetime         not null
 #
 class Admin < ApplicationRecord
+  has_many  :fondos, dependent: :destroy
   validates_uniqueness_of :nombre_admin
   validates_uniqueness_of :codigo_admin
 end
