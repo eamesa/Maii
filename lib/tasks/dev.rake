@@ -8,14 +8,16 @@ task({ :api_pull => :environment }) do
   # results_fic_raw = client.get("https://www.datos.gov.co/resource/qhpu-8ixx.json?codigo_negocio=58347&tipo_participacion=501", :$limit => 10000)
   # results_fic_raw = client.get("https://www.datos.gov.co/resource/qhpu-8ixx.json?codigo_negocio=58347", :$limit => 10000)
   # results_fvp_raw = client.get("https://www.datos.gov.co/resource/gpzw-wmxd.json?codigo_patrimonio=68", :$limit => 10000)
-  results_fic_raw = client.get("https://www.datos.gov.co/resource/qhpu-8ixx.json?fecha_corte=2022-01-01T00:00:00.000", :$limit => 1000)
-  results_fvp_raw = client.get("https://www.datos.gov.co/resource/gpzw-wmxd.json?fecha_corte=2022-01-01T00:00:00.000", :$limit => 1000)
+  # results_fic_raw = client.get("https://www.datos.gov.co/resource/qhpu-8ixx.json?fecha_corte=2022-01-01T00:00:00.000", :$limit => 1000)
+  # results_fvp_raw = client.get("https://www.datos.gov.co/resource/gpzw-wmxd.json?fecha_corte=2022-01-01T00:00:00.000", :$limit => 1000)
+  results_fic_raw = client.get("https://www.datos.gov.co/resource/qhpu-8ixx.json", :$limit => 10000)
+  results_fvp_raw = client.get("https://www.datos.gov.co/resource/gpzw-wmxd.json", :$limit => 10000)
 
   results_fic = results_fic_raw.body
   results_fvp = results_fvp_raw.body
 
-  # puts "Got #{results_fic.count} FIC results."
-  # puts "Got #{results_fvp.count} FVP results."
+  puts "Got #{results_fic.count} FIC results."
+  puts "Got #{results_fvp.count} FVP results."
   # p results_fic.first.nombre_patrimonio
   # p results_fvp.first.nombre_patrimonio
   # p results_fic.first.fecha_corte
@@ -47,6 +49,7 @@ task({ :api_pull => :environment }) do
   end
 
   admins = Admin.all
+  puts "Got #{admins.count} admins."
 
   # Fondos
 
@@ -73,6 +76,7 @@ task({ :api_pull => :environment }) do
   end
 
   funds = Fondo.all
+  puts "Got #{funds.count} funds."
 
   # Parts
 
@@ -93,7 +97,8 @@ task({ :api_pull => :environment }) do
   end
 
   parts = Part.all
-  
+  puts "Got #{parts.count} parts."
+
   # Value
 
   results_fic.each do |dato|
@@ -102,10 +107,10 @@ task({ :api_pull => :environment }) do
     valor = Value.new
     valor.fecha_corte = dato.fecha_corte
     valor.precio_cierre = dato.precierre_fondo_dia_t
-    valor.valor_fondo = dato.valor_fondo_cierre_dia_t   
-    valor.valor_unidad = dato.valor_unidad_operaciones  
+    valor.valor_fondo = dato.valor_fondo_cierre_dia_t
+    valor.valor_unidad = dato.valor_unidad_operaciones
     valor.part_id = found_part.id
-    valor.save      
+    valor.save
   end
 
   results_fvp.each do |dato|
@@ -114,10 +119,12 @@ task({ :api_pull => :environment }) do
     valor = Value.new
     valor.fecha_corte = dato.fecha_corte
     valor.precio_cierre = dato.precio_cierre_fondo_dia_t
-    valor.valor_fondo = dato.valor_fondo_cierre_dia_t  
-    valor.valor_unidad = dato.valor_unidad_operaciones  
+    valor.valor_fondo = dato.valor_fondo_cierre_dia_t
+    valor.valor_unidad = dato.valor_unidad_operaciones
     valor.part_id = found_part.id
-    valor.save      
+    valor.save
   end
 
+  values = Value.all
+  puts "Got #{values.count} values."
 end
