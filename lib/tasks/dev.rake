@@ -4,14 +4,14 @@ task({ :api_pull => :environment }) do
 
   client = SODA::Client.new({ :domain => "www.datos.gov.co", :app_token => "89JeUmeJ5oQQ1IYZsEdggf3gm" })
   # results_raw = client.get("https://www.datos.gov.co/resource/qhpu-8ixx.json", :$limit => 5000)
-  results_fic_raw = client.get("https://www.datos.gov.co/resource/qhpu-8ixx.json", {"$where" => "subtipo_negocio != 7", :$limit => 2000000})
-  # results_fic_raw = client.get("https://www.datos.gov.co/resource/qhpu-8ixx.json?codigo_negocio=58347&tipo_participacion=501", :$limit => 10000)
+  # results_fic_raw = client.get("https://www.datos.gov.co/resource/qhpu-8ixx.json", {"$where" => "subtipo_negocio != 7", :$limit => 2000000})
+  #results_fic_raw = client.get("https://www.datos.gov.co/resource/qhpu-8ixx.json?codigo_entidad=22&fecha_corte<2021-01-01T00:00:00.000", :$limit => 10000)
   # results_fic_raw = client.get("https://www.datos.gov.co/resource/qhpu-8ixx.json?codigo_negocio=58347", :$limit => 10000)
-  # results_fvp_raw = client.get("https://www.datos.gov.co/resource/gpzw-wmxd.json?codigo_patrimonio=68", :$limit => 10000)
-  # results_fic_raw = client.get("https://www.datos.gov.co/resource/qhpu-8ixx.json?fecha_corte=2022-01-01T00:00:00.000", :$limit => 1000)
-  # results_fvp_raw = client.get("https://www.datos.gov.co/resource/gpzw-wmxd.json?fecha_corte=2022-01-01T00:00:00.000", :$limit => 1000)
+  #results_fvp_raw = client.get("https://www.datos.gov.co/resource/gpzw-wmxd.json?codigo_entidad=2&fecha_corte<2021-01-01T00:00:00.000", :$limit => 10000)
+  results_fic_raw = client.get("https://www.datos.gov.co/resource/qhpu-8ixx.json?$where=fecha_corte > '2021-01-01T00:00:00.000' AND codigo_entidad = '22'", :$limit => 100000)
+  results_fvp_raw = client.get("https://www.datos.gov.co/resource/gpzw-wmxd.json?$where=fecha_corte > '2021-01-01T00:00:00.000' AND codigo_entidad = '2'", :$limit => 100000)
   # results_fic_raw = client.get("https://www.datos.gov.co/resource/qhpu-8ixx.json", :$limit => 10000000)
-  results_fvp_raw = client.get("https://www.datos.gov.co/resource/gpzw-wmxd.json", :$limit => 2000000)
+  # results_fvp_raw = client.get("https://www.datos.gov.co/resource/gpzw-wmxd.json", :$limit => 2000000)
 
   results_fic = results_fic_raw.body
   results_fvp = results_fvp_raw.body
@@ -121,7 +121,7 @@ task({ :api_pull => :environment }) do
   end
 
   puts "fics done"
-  
+
   results_fvp.each do |dato|
     found_fund_id = funds.where(:nombre_fondo => dato.nombre_patrimonio).at(0).id
     found_part = parts.where(:fondo_id => found_fund_id).at(0)
