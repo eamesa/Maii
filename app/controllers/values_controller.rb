@@ -20,42 +20,42 @@ class ValuesController < ApplicationController
   end
 
   # POST /values or /values.json
-  def create
-    @value = Value.new(value_params)
+  # def create
+  #   @value = Value.new(value_params)
 
-    respond_to do |format|
-      if @value.save
-        format.html { redirect_to value_url(@value), notice: "Value was successfully created." }
-        format.json { render :show, status: :created, location: @value }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @value.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  #   respond_to do |format|
+  #     if @value.save
+  #       format.html { redirect_to value_url(@value), notice: "Value was successfully created." }
+  #       format.json { render :show, status: :created, location: @value }
+  #     else
+  #       format.html { render :new, status: :unprocessable_entity }
+  #       format.json { render json: @value.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
 
   # PATCH/PUT /values/1 or /values/1.json
-  def update
-    respond_to do |format|
-      if @value.update(value_params)
-        format.html { redirect_to value_url(@value), notice: "Value was successfully updated." }
-        format.json { render :show, status: :ok, location: @value }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @value.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  # def update
+  #   respond_to do |format|
+  #     if @value.update(value_params)
+  #       format.html { redirect_to value_url(@value), notice: "Value was successfully updated." }
+  #       format.json { render :show, status: :ok, location: @value }
+  #     else
+  #       format.html { render :edit, status: :unprocessable_entity }
+  #       format.json { render json: @value.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
 
   # DELETE /values/1 or /values/1.json
-  def destroy
-    @value.destroy
+  # def destroy
+  #   @value.destroy
 
-    respond_to do |format|
-      format.html { redirect_to values_url, notice: "Value was successfully destroyed." }
-      format.json { head :no_content }
-    end
-  end
+  #   respond_to do |format|
+  #     format.html { redirect_to values_url, notice: "Value was successfully destroyed." }
+  #     format.json { head :no_content }
+  #   end
+  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.

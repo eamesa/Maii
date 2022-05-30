@@ -20,42 +20,42 @@ class PartsController < ApplicationController
   end
 
   # POST /parts or /parts.json
-  def create
-    @part = Part.new(part_params)
+  # def create
+  #   @part = Part.new(part_params)
 
-    respond_to do |format|
-      if @part.save
-        format.html { redirect_to part_url(@part), notice: "Part was successfully created." }
-        format.json { render :show, status: :created, location: @part }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @part.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  #   respond_to do |format|
+  #     if @part.save
+  #       format.html { redirect_to part_url(@part), notice: "Part was successfully created." }
+  #       format.json { render :show, status: :created, location: @part }
+  #     else
+  #       format.html { render :new, status: :unprocessable_entity }
+  #       format.json { render json: @part.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
 
   # PATCH/PUT /parts/1 or /parts/1.json
-  def update
-    respond_to do |format|
-      if @part.update(part_params)
-        format.html { redirect_to part_url(@part), notice: "Part was successfully updated." }
-        format.json { render :show, status: :ok, location: @part }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @part.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  # def update
+  #   respond_to do |format|
+  #     if @part.update(part_params)
+  #       format.html { redirect_to part_url(@part), notice: "Part was successfully updated." }
+  #       format.json { render :show, status: :ok, location: @part }
+  #     else
+  #       format.html { render :edit, status: :unprocessable_entity }
+  #       format.json { render json: @part.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
 
   # DELETE /parts/1 or /parts/1.json
-  def destroy
-    @part.destroy
+  # def destroy
+  #   @part.destroy
 
-    respond_to do |format|
-      format.html { redirect_to parts_url, notice: "Part was successfully destroyed." }
-      format.json { head :no_content }
-    end
-  end
+  #   respond_to do |format|
+  #     format.html { redirect_to parts_url, notice: "Part was successfully destroyed." }
+  #     format.json { head :no_content }
+  #   end
+  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.

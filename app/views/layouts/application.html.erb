@@ -1,21 +1,67 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>FinalProject</title>
+    <title>Maii</title>
     <%= csrf_meta_tags %>
-
     <!-- Expand the number of characters we can use in the document beyond basic ASCII 🎉 -->
     <meta charset="utf-8">
-
     <!-- Make it responsive to small screens -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <%= csp_meta_tag %>
-
+    <!-- Link Stylesheet -->
+    <link rel="stylesheet" href="/bootstrap.css">
+    <!-- Connect Bootstrap JavaScript and its dependencies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <%= stylesheet_link_tag 'application', media: 'all' %>
-
   </head>
 
   <body>
-    <%= yield %>
-  </body>
-</html>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Menu</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor01">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="/">Maii
+                <span class="visually-hidden">(current)</span>
+              </a>
+            </li>
+            <%if session.fetch(:user_id) != nil%>
+              <li class="nav-item">
+                <a class="nav-link" href="/administradoras">Agregar</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/favoritos">Comparador</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/portafolio">Mi portafolio</a>
+              </li>
+            <%end%>
+            <li class="nav-item">
+              <a class="nav-link" href="/nosotros">Nosotros</a>
+            </li>
+            <%if session.fetch(:user_id) == nil%>
+              <li class="nav-item">
+                <a class="nav-link" href="/user_sign_up">Unete a Maii</a>
+              <%end%>
+            </li>
+            <%if session.fetch(:user_id) == nil%>
+              <li class="nav-item">
+                <a class="nav-link" href="/user_sign_in">Entra a tu cuenta</a>
+              </li>
+            <%else%>
+              <li class="nav-item">
+                <a class="nav-link" href="/user_sign_out">Salir de tu cuenta</a>
+              </li>
+            <%end%>
+          </div>
+        </div>
+      </nav>
+      <%= yield %>
+    </body>
+  </html>

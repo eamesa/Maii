@@ -20,42 +20,42 @@ class FondosController < ApplicationController
   end
 
   # POST /fondos or /fondos.json
-  def create
-    @fondo = Fondo.new(fondo_params)
+  # def create
+  #   @fondo = Fondo.new(fondo_params)
 
-    respond_to do |format|
-      if @fondo.save
-        format.html { redirect_to fondo_url(@fondo), notice: "Fondo was successfully created." }
-        format.json { render :show, status: :created, location: @fondo }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @fondo.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  #   respond_to do |format|
+  #     if @fondo.save
+  #       format.html { redirect_to fondo_url(@fondo), notice: "Fondo was successfully created." }
+  #       format.json { render :show, status: :created, location: @fondo }
+  #     else
+  #       format.html { render :new, status: :unprocessable_entity }
+  #       format.json { render json: @fondo.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
 
   # PATCH/PUT /fondos/1 or /fondos/1.json
-  def update
-    respond_to do |format|
-      if @fondo.update(fondo_params)
-        format.html { redirect_to fondo_url(@fondo), notice: "Fondo was successfully updated." }
-        format.json { render :show, status: :ok, location: @fondo }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @fondo.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  # def update
+  #   respond_to do |format|
+  #     if @fondo.update(fondo_params)
+  #       format.html { redirect_to fondo_url(@fondo), notice: "Fondo was successfully updated." }
+  #       format.json { render :show, status: :ok, location: @fondo }
+  #     else
+  #       format.html { render :edit, status: :unprocessable_entity }
+  #       format.json { render json: @fondo.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
 
   # DELETE /fondos/1 or /fondos/1.json
-  def destroy
-    @fondo.destroy
+  # def destroy
+  #   @fondo.destroy
 
-    respond_to do |format|
-      format.html { redirect_to fondos_url, notice: "Fondo was successfully destroyed." }
-      format.json { head :no_content }
-    end
-  end
+  #   respond_to do |format|
+  #     format.html { redirect_to fondos_url, notice: "Fondo was successfully destroyed." }
+  #     format.json { head :no_content }
+  #   end
+  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.
