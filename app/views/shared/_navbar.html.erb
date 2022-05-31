@@ -1,68 +1,48 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
   <div class="container">
     <a class="navbar-brand" href="/">
-      FinalProject
+      Maii
     </a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsible-nav-links" aria-controls="collapsible-nav-links" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="collapsible-nav-links">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Resources
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link active" href="/">Maii
+            <span class="visually-hidden">(current)</span>
           </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a href="/investmentsparts" class="dropdown-item">
-              Investmentsparts
-            </a>
-            <a href="/portfolios" class="dropdown-item">
-              Portfolios
-            </a>
-            <a href="/investments" class="dropdown-item">
-              Investments
-            </a>
-            <a href="/parts" class="dropdown-item">
-              Parts
-            </a>
-            <a href="/fondos" class="dropdown-item">
-              Fondos
-            </a>
-            <a href="/favoritos" class="dropdown-item">
-              Favoritos
-            </a>
-          </div>
         </li>
-      </ul>
-      <ul class="navbar-nav">
-        <% if current_user.blank? %>
+        <%if session.fetch(:user_id) != nil%>
           <li class="nav-item">
-            <a href="/users/sign_in" class="nav-link">
-              Sign in
-            </a>
+            <a class="nav-link" href="/administradoras">Agregar</a>
           </li>
-
           <li class="nav-item">
-            <a href="/users/sign_up" class="nav-link">
-              Sign up
-            </a>
+            <a class="nav-link" href="/favoritos">Comparador</a>
           </li>
-        <% else %>
           <li class="nav-item">
-            <a href="/users/edit" class="nav-link">
-              Edit profile
-            </a>
+            <a class="nav-link" href="/portafolio">Mi portafolio</a>
           </li>
-
+        <%end%>
+        <li class="nav-item">
+          <a class="nav-link" href="/nosotros">Nosotros</a>
+        </li>
+        <%if session.fetch(:user_id) == nil%>
           <li class="nav-item">
-            <a href="/users/sign_out" data-method="delete" class="nav-link">
-              Sign out
-            </a>
+            <a class="nav-link" href="/user_sign_up">Unete a Maii</a>
+          <%end%>
+        </li>
+        <%if session.fetch(:user_id) == nil%>
+          <li class="nav-item">
+            <a class="nav-link" href="/user_sign_in">Entra a tu cuenta</a>
           </li>
-        <% end %>
-      </ul>
-    </div> <!-- .navbar-collapse -->
-  </div> <!-- .container -->
-</nav>
+        <%else%>
+          <li class="nav-item">
+            <a class="nav-link" href="/user_sign_out">Salir de tu cuenta</a>
+          </li>
+        <%end%>
+      </div>
+    </div>
+  </nav>
