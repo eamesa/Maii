@@ -137,4 +137,3 @@ task({ :api_pull => :environment }) do
   values = Value.all
   puts "Got #{values.count} values."
 end
-
