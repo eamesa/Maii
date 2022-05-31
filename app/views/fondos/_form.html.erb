@@ -1,0 +1,47 @@
+<%= form_with(model: fondo, local: true) do |form| %>
+  <% if fondo.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(fondo.errors.count, "error") %> prohibited this fondo from being saved:</h2>
+
+      <ul>
+        <% fondo.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :nombre_fondo %>
+    <%= form.text_field :nombre_fondo %>
+  </div>
+
+  <div class="field">
+    <%= form.label :admin_id %>
+    <%= form.text_field :admin_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :tipo_fondo %>
+    <%= form.text_field :tipo_fondo %>
+  </div>
+
+  <div class="field">
+    <%= form.label :codigo_tipo_fondo %>
+    <%= form.text_field :codigo_tipo_fondo %>
+  </div>
+
+  <div class="field">
+    <%= form.label :codigo_fondo %>
+    <%= form.text_field :codigo_fondo %>
+  </div>
+
+  <div class="field">
+    <%= form.label :tipo_participaciones_count %>
+    <%= form.number_field :tipo_participaciones_count %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
