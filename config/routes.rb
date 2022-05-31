@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :values
   resources :investmentsparts
   resources :portfolios
   resources :investments

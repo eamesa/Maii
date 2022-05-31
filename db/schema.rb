@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_31_224909) do
+ActiveRecord::Schema.define(version: 2022_05_31_233839) do
 
   create_table "admins", force: :cascade do |t|
     t.string "nombre_admin"
@@ -94,6 +94,17 @@ ActiveRecord::Schema.define(version: 2022_05_31_224909) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "values", force: :cascade do |t|
+    t.datetime "fecha_corte"
+    t.float "precio_cierre"
+    t.float "valor_unidad"
+    t.float "valor_fondo"
+    t.integer "part_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["part_id"], name: "index_values_on_part_id"
+  end
+
   add_foreign_key "favoritos", "parts"
   add_foreign_key "favoritos", "users"
   add_foreign_key "fondos", "admins"
@@ -103,4 +114,5 @@ ActiveRecord::Schema.define(version: 2022_05_31_224909) do
   add_foreign_key "investmentsparts", "parts"
   add_foreign_key "parts", "fondos"
   add_foreign_key "portfolios", "users"
+  add_foreign_key "values", "parts"
 end
