@@ -137,3 +137,24 @@ task({ :api_pull => :environment }) do
   values = Value.all
   puts "Got #{values.count} values."
 end
+
+desc "Fill the rest of the db with sample data"
+task({ :sample_data => :environment }) do
+  p "Creating Sample Data"
+  
+  emails = Array.new
+
+  emails << "alice@example.com"
+  emails << "bob@example.com"
+  emails << "ernesto@maii.com"
+  emails << "maya@maii.com"
+
+  emails.each do |mail|
+    User.create(
+      email: "#{mail}",
+      password: "password"
+    )
+  end
+  p "#{User.count} users have been created"
+
+end
