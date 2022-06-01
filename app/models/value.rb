@@ -21,6 +21,4 @@
 #
 class Value < ApplicationRecord
   belongs_to :part
-  validates_uniqueness_of :fondo
-  validates_uniqueness_of :codigo_participaciones
 end
