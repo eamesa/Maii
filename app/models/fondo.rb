@@ -22,4 +22,6 @@
 #
 class Fondo < ApplicationRecord
   belongs_to :admin
+  has_many  :tipo_participaciones, class_name: "Part", dependent: :destroy
+  validates_uniqueness_of :nombre_fondo
 end

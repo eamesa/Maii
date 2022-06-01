@@ -22,6 +22,9 @@
 #  portfolio_id  (portfolio_id => portfolios.id)
 #
 class Investment < ApplicationRecord
-  belongs_to :part
-  belongs_to :portfolio
+  belongs_to :portfolio, counter_cache: true
+  has_many :investmentsparts, dependent: :destroy
+  has_many :parts, through: :investmentsparts, source: :part
+  has_one  :user, through: :portfolio, source: :user
+  has_many :values, through: :parts, source: :values
 end
