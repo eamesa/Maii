@@ -8,8 +8,8 @@ task({ :api_pull => :environment }) do
   #results_fic_raw = client.get("https://www.datos.gov.co/resource/qhpu-8ixx.json?codigo_entidad=22&fecha_corte<2021-01-01T00:00:00.000", :$limit => 10000)
   # results_fic_raw = client.get("https://www.datos.gov.co/resource/qhpu-8ixx.json?codigo_negocio=58347", :$limit => 10000)
   #results_fvp_raw = client.get("https://www.datos.gov.co/resource/gpzw-wmxd.json?codigo_entidad=2&fecha_corte<2021-01-01T00:00:00.000", :$limit => 10000)
-  results_fic_raw = client.get("https://www.datos.gov.co/resource/qhpu-8ixx.json?$where=fecha_corte > '2021-01-01T00:00:00.000' AND codigo_entidad = '22'", :$limit => 100000)
-  results_fvp_raw = client.get("https://www.datos.gov.co/resource/gpzw-wmxd.json?$where=fecha_corte > '2021-01-01T00:00:00.000' AND codigo_entidad = '2'", :$limit => 100000)
+  results_fic_raw = client.get("https://www.datos.gov.co/resource/qhpu-8ixx.json?$where=fecha_corte > '2022-01-01T00:00:00.000' AND codigo_entidad = '22'", :$limit => 100000)
+  results_fvp_raw = client.get("https://www.datos.gov.co/resource/gpzw-wmxd.json?$where=fecha_corte > '2022-01-01T00:00:00.000' AND codigo_entidad = '2'", :$limit => 100000)
   # results_fic_raw = client.get("https://www.datos.gov.co/resource/qhpu-8ixx.json", :$limit => 10000000)
   # results_fvp_raw = client.get("https://www.datos.gov.co/resource/gpzw-wmxd.json", :$limit => 2000000)
 
