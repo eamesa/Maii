@@ -1,7 +1,8 @@
 desc "Hydrate the database with some sample data to look at so that developing is easier"
 task({ :api_pull => :environment }) do
   require "soda/client"
-
+  start = Time.now
+  p start
   client = SODA::Client.new({ :domain => "www.datos.gov.co", :app_token => "89JeUmeJ5oQQ1IYZsEdggf3gm" })
   # results_raw = client.get("https://www.datos.gov.co/resource/qhpu-8ixx.json", :$limit => 5000)
   # results_fic_raw = client.get("https://www.datos.gov.co/resource/qhpu-8ixx.json", {"$where" => "subtipo_negocio != 7", :$limit => 2000000})
@@ -14,7 +15,9 @@ task({ :api_pull => :environment }) do
   # results_fvp_raw = client.get("https://www.datos.gov.co/resource/gpzw-wmxd.json", :$limit => 2000000)
 
   results_fic = results_fic_raw.body
+  p "#{Time.now - start}"
   results_fvp = results_fvp_raw.body
+  p "#{Time.now - start}"
 
   puts "Got #{results_fic.count} FIC results."
   puts "Got #{results_fvp.count} FVP results."
@@ -25,10 +28,10 @@ task({ :api_pull => :environment }) do
   # p results_fvp.first.fecha_corte
   # p results_fvp.last.fecha_corte
 
-  # Value.destroy_all
-  # Part.destroy_all
-  # Fondo.destroy_all
-  # Admin.destroy_all
+  Value.destroy_all
+  Part.destroy_all
+  Fondo.destroy_all
+  Admin.destroy_all
 
   # Admins
 
@@ -41,7 +44,7 @@ task({ :api_pull => :environment }) do
   end
 
   puts "fics done"
-
+  p "#{Time.now - start}"
 
   results_fvp.each do |dato|
     admin = Admin.new
@@ -53,6 +56,7 @@ task({ :api_pull => :environment }) do
 
   admins = Admin.all
   puts "Got #{admins.count} admins."
+  p "#{Time.now - start}"
 
   # Fondos
 
@@ -68,6 +72,7 @@ task({ :api_pull => :environment }) do
   end
 
   puts "fics done"
+  p "#{Time.now - start}"
 
   results_fvp.each do |dato|
     found_admin = admins.where(:codigo_admin => dato.codigo_entidad).at(0)
@@ -82,22 +87,26 @@ task({ :api_pull => :environment }) do
 
   funds = Fondo.all
   puts "Got #{funds.count} funds."
+  p "#{Time.now - start}"
 
   # Parts
 
   results_fic.each do |dato|
     found_fund = funds.where(:nombre_fondo => dato.nombre_patrimonio).at(0)
     part = Part.new
+    part.part_validator = "#{found_fund.id}#{dato.tipo_participacion}"
     part.codigo_participaciones = dato.tipo_participacion
     part.fondo_id = found_fund.id
     part.save
   end
 
   puts "fics done"
+  p "#{Time.now - start}"
 
   results_fvp.each do |dato|
     found_fund = funds.where(:nombre_fondo => dato.nombre_patrimonio).at(0)
     part = Part.new
+    part.part_validator = "#{found_fund.id}"
     part.codigo_participaciones = 1
     part.fondo_id = found_fund.id
     part.save
@@ -105,6 +114,7 @@ task({ :api_pull => :environment }) do
 
   parts = Part.all
   puts "Got #{parts.count} parts."
+  p "#{Time.now - start}"
 
   # Value
 
@@ -121,6 +131,7 @@ task({ :api_pull => :environment }) do
   end
 
   puts "fics done"
+  p "#{Time.now - start}"
 
   results_fvp.each do |dato|
     found_fund_id = funds.where(:nombre_fondo => dato.nombre_patrimonio).at(0).id
@@ -136,12 +147,13 @@ task({ :api_pull => :environment }) do
 
   values = Value.all
   puts "Got #{values.count} values."
+  p "#{Time.now - start}"
 end
 
 desc "Fill the rest of the db with sample data"
 task({ :sample_data => :environment }) do
   p "Creating Sample Data"
-  
+
   emails = Array.new
 
   emails << "alice@example.com"
@@ -152,9 +164,8 @@ task({ :sample_data => :environment }) do
   emails.each do |mail|
     User.create(
       email: "#{mail}",
-      password: "password"
+      password: "password",
     )
   end
   p "#{User.count} users have been created"
-
 end
