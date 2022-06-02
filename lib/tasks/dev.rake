@@ -25,10 +25,10 @@ task({ :api_pull => :environment }) do
   # p results_fvp.first.fecha_corte
   # p results_fvp.last.fecha_corte
 
-  Value.destroy_all
-  Part.destroy_all
-  Fondo.destroy_all
-  Admin.destroy_all
+  # Value.destroy_all
+  # Part.destroy_all
+  # Fondo.destroy_all
+  # Admin.destroy_all
 
   # Admins
 
