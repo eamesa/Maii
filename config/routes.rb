@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
   root "portfolios#index"
 
+  devise_for :users
+  
   resources :values
   resources :investmentsparts
   resources :portfolios
@@ -10,5 +12,4 @@ Rails.application.routes.draw do
   resources :fondos
   resources :admins
   resources :favoritos
-  devise_for :users
 end
