@@ -1,8 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
   <div class="container">
-    <a class="navbar-brand" href="/">
-      Maii
-    </a>
+  <%= link_to "Maii", root_path %>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsible-nav-links" aria-controls="collapsible-nav-links" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -15,34 +13,34 @@
             <span class="visually-hidden">(current)</span>
           </a>
         </li>
-        <%if session.fetch(:user_id) != nil%>
+        <%#if session.fetch(:user_id) != nil%>
           <li class="nav-item">
             <a class="nav-link" href="/administradoras">Agregar</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/favoritos">Comparador</a>
+            <%= link_to "Comparador", favoritos_path, class: "nav-link" %>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/portafolio">Mi portafolio</a>
+            <%= link_to "Mis portafolios", portfolios_path, class: "nav-link" %>
           </li>
-        <%end%>
+        <%#end%>
         <li class="nav-item">
           <a class="nav-link" href="/nosotros">Nosotros</a>
         </li>
-        <%if session.fetch(:user_id) == nil%>
+        <%#if session.fetch(:user_id) == nil%>
           <li class="nav-item">
-            <a class="nav-link" href="/user_sign_up">Unete a Maii</a>
-          <%end%>
+            <%= link_to "Unete a Maii", new_user_registration_path, class: "nav-link" %>
+          <%#end%>
         </li>
-        <%if session.fetch(:user_id) == nil%>
+        <%#if session.fetch(:user_id) == nil%>
           <li class="nav-item">
-            <a class="nav-link" href="/user_sign_in">Entra a tu cuenta</a>
+          <%= link_to "Entra a tu cuenta", new_user_session_path, class: "nav-link" %>
           </li>
-        <%else%>
+        <%#else%>
           <li class="nav-item">
-            <a class="nav-link" href="/user_sign_out">Salir de tu cuenta</a>
+          <%= link_to "Salir de tu cuenta", destroy_user_session_path, class: "nav-link" %>
           </li>
-        <%end%>
+        <%#end%>
       </div>
     </div>
   </nav>
