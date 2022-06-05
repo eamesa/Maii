@@ -18,7 +18,7 @@
         <td><%= favorito.user_id %></td>
         <td><%= link_to 'Show', favorito %></td>
         <td><%= link_to 'Edit', edit_favorito_path(favorito) %></td>
-        <td><%= link_to 'Destroy', favorito, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= button_to 'Destroy', favorito, method: :delete, remote: true %></td>
       </tr>
     <% end %>
   </tbody>
