@@ -27,21 +27,24 @@
         <li class="nav-item">
           <a class="nav-link" href="/nosotros">Nosotros</a>
         </li>
-        <%if user_signed_in? == false %>
-          <li class="nav-item">
-            <%= link_to "Unete a Maii", new_user_registration_path, class: "nav-link" %>
-          </li>
-        <% end %>
-        <%if user_signed_in? == false %>
-          <li class="nav-item">
-            <%= link_to "Entra a tu cuenta", new_user_session_path, class: "nav-link" %>
-          </li>
-        <%else%>
-          <li class="nav-item">
-            <%= button_to "Salir de tu cuenta", destroy_user_session_path, method: :delete, class: "btn btn-primary"%>
-          </li>
-        <%end%>
       </ul>
+      <div class="d-flex">
+      <%if user_signed_in? == false %>
+        <li class="nav-item">
+          <%= button_to "Unete a Maii", new_user_registration_path, class: "btn btn-primary" %>
+        </li>
+        <li class="nav-item">
+          <%= button_to "Entra a tu cuenta", new_user_session_path, class: "btn btn-primary" %>
+        </li>
+      <%else%>
+        <li class="nav-item">
+          <%= button_to "Edita tu cuenta", edit_user_registration_path, method: :get, class: "btn btn-primary"%>
+        </li>
+        <li class="nav-item">
+          <%= button_to "Salir de tu cuenta", destroy_user_session_path, method: :delete, class: "btn btn-primary"%>
+        </li>
+      <%end%>
+      </div>
     </div>
   </div>
 </nav>

@@ -10,7 +10,9 @@
       <th>Codigo Administradora</th>
       <th>Nombre Fondo</th>
       <th>Codigo Fondo</th>
-      <th>Codigo Participaciones</th>
+      <th>Codigo Participacion</th>
+      <th>Agregar a mis favoritos</th>
+      <th>Agregar a mis portafolios</th>
 
     </tr>
   </thead>
@@ -24,6 +26,16 @@
         <td><%= part.fondo.nombre_fondo %></td>
         <td><%= part.fondo.codigo_fondo %></td>
         <td><%= part.codigo_participaciones %></td>
+        <td>
+          <button class="btn btn-outline-primary">
+            Agregar esta participacion (<%= part.codigo_participaciones %>) a mis favoritos
+          </button>
+        </td>
+        <td>
+          <button class="btn btn-outline-primary">
+            Agregar esta participacion (<%= part.codigo_participaciones %>) a mis portafolios
+          </button>
+        </td>
 
       </tr>
     <% end %>
