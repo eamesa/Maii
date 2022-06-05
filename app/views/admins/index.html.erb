@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Admins</h1>
+<h1>Admins <%= current_user.id %></h1>
 
 <table>
   <thead>
@@ -11,6 +11,7 @@
       <th>Nombre Fondo</th>
       <th>Codigo Fondo</th>
       <th>Codigo Participacion</th>
+      <th>Part id</th>
       <th>Agregar a mis favoritos</th>
       <th>Agregar a mis portafolios</th>
 
@@ -26,11 +27,14 @@
         <td><%= part.fondo.nombre_fondo %></td>
         <td><%= part.fondo.codigo_fondo %></td>
         <td><%= part.codigo_participaciones %></td>
-        <td>
-          <button class="btn btn-outline-primary">
-            Agregar esta participacion (<%= part.codigo_participaciones %>) a mis favoritos
-          </button>
-        </td>
+        <td><%= part.id %></td>
+        <%= form_with(model: Favorito.new, local: true, id: "add_favorito") do |form| %>
+          <%= form.hidden_field :user_id, value: current_user.id%>
+          <%= form.hidden_field :part_id, value: part.id%>
+          <td>
+            <%= form.submit "Agregar esta participacion (#{part.codigo_participaciones}) a mis favoritos", class: "btn btn-outline-primary" %>
+          </td>
+        <% end%>
         <td>
           <button class="btn btn-outline-primary">
             Agregar esta participacion (<%= part.codigo_participaciones %>) a mis portafolios
