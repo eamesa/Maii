@@ -23,6 +23,6 @@ class Part < ApplicationRecord
   has_many :favoritos, dependent: :destroy
   has_many :values, dependent: :destroy
   has_many :investmentsparts, dependent: :destroy
-  has_one :administradora, through: :fondo, source: :administradora
+  has_one :admin, through: :fondo, source: :admin
   has_many :investments, through: :investmentsparts, source: :investment
 end
