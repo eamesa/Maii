@@ -10,8 +10,9 @@
       <th>Tipo participacion</th>
       <th>Valor del fondo</th>
       <th>Valor de la unidad</th>
+      <th>Fecha de corte</th>
+      <th>Mostrar favorito</th>
       <th>Eliminar favorito</th>
-      <th colspan="3"></th>
     </tr>
   </thead>
 
@@ -21,9 +22,11 @@
         <td><%= favorito.part.admin.nombre_admin %></td>
         <td><%= favorito.part.fondo.nombre_fondo %></td>
         <td><%= favorito.part.codigo_participaciones %></td>
-        <td><%= favorito.part.value.valor_unidad %></td>
-        <td><%= link_to 'Show', favorito %></td>
-        <td><%= button_to 'Destroy', favorito, method: :delete, remote: true %></td>
+        <td><%= @values.part_find(favorito.part.id).last_date.last.valor_fondo %></td>
+        <td><%= @values.part_find(favorito.part.id).last_date.last.valor_unidad %></td>
+        <td><%= @values.part_find(favorito.part.id).last_date.last.fecha_corte %></td>
+        <td><%= link_to 'Mostrar', favorito %></td>
+        <td><%= button_to 'Eliminar favorito', favorito, method: :delete, remote: true %></td>
       </tr>
     <% end %>
   </tbody>

@@ -4,6 +4,7 @@ class FavoritosController < ApplicationController
   # GET /favoritos or /favoritos.json
   def index
     @favoritos = Favorito.all
+    @values = Value.all
   end
 
   # GET /favoritos/1 or /favoritos/1.json
