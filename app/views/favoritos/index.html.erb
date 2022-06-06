@@ -2,11 +2,15 @@
 
 <h1>Favoritos</h1>
 
-<table>
+<table class="table table-hover">
   <thead>
     <tr>
-      <th>Part</th>
-      <th>User</th>
+      <th>Administradora</th>
+      <th>Fondo</th>
+      <th>Tipo participacion</th>
+      <th>Valor del fondo</th>
+      <th>Valor de la unidad</th>
+      <th>Eliminar favorito</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -14,10 +18,11 @@
   <tbody>
     <% @favoritos.each do |favorito| %>
       <tr>
-        <td><%= favorito.part_id %></td>
-        <td><%= favorito.user_id %></td>
+        <td><%= favorito.part.admin.nombre_admin %></td>
+        <td><%= favorito.part.fondo.nombre_fondo %></td>
+        <td><%= favorito.part.codigo_participaciones %></td>
+        <td><%= favorito.part.value.valor_unidad %></td>
         <td><%= link_to 'Show', favorito %></td>
-        <td><%= link_to 'Edit', edit_favorito_path(favorito) %></td>
         <td><%= button_to 'Destroy', favorito, method: :delete, remote: true %></td>
       </tr>
     <% end %>
