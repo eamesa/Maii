@@ -11,6 +11,8 @@
       <th>Valor del fondo</th>
       <th>Valor de la unidad</th>
       <th>Fecha de corte</th>
+      <th>Rentabilidad 30 dias</th>
+      <th>Rentabilidad 90 dias</th>
       <th>Mostrar favorito</th>
       <th>Eliminar favorito</th>
     </tr>
@@ -22,9 +24,11 @@
         <td><%= favorito.part.admin.nombre_admin %></td>
         <td><%= favorito.part.fondo.nombre_fondo %></td>
         <td><%= favorito.part.codigo_participaciones %></td>
-        <td><%= @values.part_find(favorito.part.id).last_date.last.valor_fondo %></td>
+        <td><%= @values.part_last_date(favorito.part.id).valor_fondo %></td>
         <td><%= @values.part_last_date(favorito.part.id).valor_unidad %></td>
-        <td><%= @values.part_last_date(favorito.part.id).fecha_corte %></td>
+        <td><%= @values.part_last_date(favorito.part.id).fecha_corte.to_formatted_s() %></td>
+        <td><%= @values.rentabilidad(favorito.part.id,@values.part_last_date(favorito.part.id).fecha_corte,((@values.part_last_date(favorito.part.id).fecha_corte) - 30.days))  %></td>
+        <td><%= @values.rentabilidad(favorito.part.id,@values.part_last_date(favorito.part.id).fecha_corte,((@values.part_last_date(favorito.part.id).fecha_corte) - 90.days)) %></td>
         <td><%= link_to 'Mostrar', favorito %></td>
         <td><%= button_to 'Eliminar favorito', favorito, method: :delete, remote: true %></td>
       </tr>
