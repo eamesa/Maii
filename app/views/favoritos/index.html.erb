@@ -23,8 +23,8 @@
         <td><%= favorito.part.fondo.nombre_fondo %></td>
         <td><%= favorito.part.codigo_participaciones %></td>
         <td><%= @values.part_find(favorito.part.id).last_date.last.valor_fondo %></td>
-        <td><%= @values.part_find(favorito.part.id).last_date.last.valor_unidad %></td>
-        <td><%= @values.part_find(favorito.part.id).last_date.last.fecha_corte %></td>
+        <td><%= @values.part_last_date(favorito.part.id).valor_unidad %></td>
+        <td><%= @values.part_last_date(favorito.part.id).fecha_corte %></td>
         <td><%= link_to 'Mostrar', favorito %></td>
         <td><%= button_to 'Eliminar favorito', favorito, method: :delete, remote: true %></td>
       </tr>

@@ -20,11 +20,13 @@
 #  part_id  (part_id => parts.id)
 #
 class Value < ApplicationRecord
-  belongs_to :part
   def Value.part_last_date(part_id)
     where(part_id: part_id).order(fecha_corte: :desc).last
   end
+
+  belongs_to :part
   # Value.where(part_id: favorito.part.id).order(fecha_corte: :desc).last.fecha_corte
   scope :part_find, ->(part_id) {where(part_id: part_id)}
   scope :last_date, -> {order( fecha_corte: :desc)}
+  #scope :part_last_date, ->(part_id) {where(part_id: part_id).order( fecha_corte: :desc)}
 end
