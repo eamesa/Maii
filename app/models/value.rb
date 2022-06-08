@@ -27,12 +27,12 @@ class Value < ApplicationRecord
     where(part_id: part_id).where(fecha_corte: fecha)
   end
 
-  def Value.rentabilidad(part_id,date_t0,date_t1)
+  def Value.rentabilidad(part_id,date_t1,date_t0)
     value_t0 = self.part_date(part_id,date_t0).first.valor_unidad
     value_t1 = self.part_date(part_id,date_t1).first.valor_unidad
-    days = date_t1 - date_t0
-    rentabilidad = (value_t0/value_t1)**(365/(date_t1 - date_t0))-1
-    return rentabilidad
+    days = (date_t1.to_date - date_t0.to_date).to_i
+    rentabilidad = (value_t1/value_t0)**(365/(days))-1
+    return "[#{rentabilidad},#{date_t1},#{date_t0},#{days}]"
   end
 
   belongs_to :part
